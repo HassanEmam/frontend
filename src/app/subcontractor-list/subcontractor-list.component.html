@@ -1,0 +1,19 @@
+<h1> Subcontractors List </h1>
+  <div>
+    <table  style="width:100%">
+      <tr>
+        <th>subcontractor Code</th>
+        <th>subcontractor Name</th>
+        <th>Description</th>
+        <th>Contact Person</th>
+        <th>Contact Number</th>
+      </tr>
+      <tr *ngFor="let subcontractor of subcontractors">
+        <td> {{ subcontractor.code }} </td>
+        <td> {{ subcontractor.name }} </td>
+        <td> {{ subcontractor.description }} </td>
+        <td> {{ subcontractor.contact_person }} </td>
+        <td> {{ subcontractor.contact_number }} </td>
+      </tr>
+    </table>
+  </div>
