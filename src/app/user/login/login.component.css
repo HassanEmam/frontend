@@ -1,0 +1,45 @@
+mat-card-header{
+    background: blue;
+    padding: 10px;
+    color: white;
+    /* needed styles below */
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2em;
+}
+.mat-card-header-text{
+    align-content: center;
+}
+.example-icon {
+    padding: 0 14px;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  .example-card {
+    width: 400px;
+    margin: 10% auto;
+  }
+  .mat-card-title{
+    font-size: 16px;
+  }
+
+  .formFieldWidth .mat-form-field-infix {
+    width: 400px;
+ }
+
+ .form-full-width {
+    min-width: 150px;
+    max-width: 350px;
+    width:100%;
+    justify-content: center;
+}
+
+.input-full-width {
+    width:800px;
+}
+
+/* .mat-form-field.mat-form-field {
+    width: auto;
+} */
