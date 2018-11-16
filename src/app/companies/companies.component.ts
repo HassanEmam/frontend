@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { CompaniesService } from '../services/companies.service'
 
 @Component({
   selector: 'app-companies',
@@ -9,7 +10,7 @@ import { ApiService } from '../api.service';
 export class CompaniesComponent implements OnInit {
 
   private  companies:  Array<object> = [];
-  constructor(private  apiService:  ApiService) { }
+  constructor(private  apiService:  CompaniesService) { }
   ngOnInit() {
       this.getCompanies();
   }

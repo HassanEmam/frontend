@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
-
+import { SubcontractorsService } from '../services/subcontractors.service'
 @Component({
   selector: 'app-subcontractor-list',
   templateUrl: './subcontractor-list.component.html',
@@ -9,7 +8,7 @@ import { ApiService } from '../api.service';
 export class SubcontractorListComponent implements OnInit {
   private  subcontractors:  Array<object> = [];
 
-  constructor(private apiService:ApiService) { }
+  constructor(private apiService:SubcontractorsService) { }
 
   ngOnInit() {
     this.getSubcontractors()

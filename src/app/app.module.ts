@@ -14,6 +14,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { CustomMaterialModule } from './material/material.module'
 import { UserService } from './services/user.service';
 import { GlobalService } from './services/global.service';
+import { CompaniesService } from './services/companies.service';
+import { SubcontractorsService } from './services/subcontractors.service';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +40,9 @@ import { GlobalService } from './services/global.service';
   
   providers: [
     UserService,
-    GlobalService
+    GlobalService,
+    CompaniesService,
+    SubcontractorsService
   ],
   bootstrap: [AppComponent]
 })
