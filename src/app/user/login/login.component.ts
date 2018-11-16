@@ -4,15 +4,20 @@ import {Router} from '@angular/router';
 import { LoginResultModel } from '../../login-result-model';
 import { map } from 'rxjs/operators';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
+import { UserService } from '../../services/user.service';
+import { GlobalService } from '../../services/global.service';
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [UserService]
+
 })
 export class LoginComponent implements OnInit {
-  private  result: LoginResultModel;
+  
+  loading: boolean;
   username:string;
   password:string;
   userLogin = new FormGroup({
@@ -21,7 +26,8 @@ export class LoginComponent implements OnInit {
   });
 
 
-  constructor(private apiService:ApiService, private fb:FormBuilder) { 
+  constructor(private apiService:ApiService, private router: Router, 
+    private userService: UserService, private fb:FormBuilder, private global: GlobalService) { 
     this.userLogin = this.fb.group({
       username: ['', Validators.required] ,
       password: ['', Validators.required]
@@ -31,9 +37,21 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  OnLogin(){
-    console.log("Hassan Emam");
+  OnLogin() {
+    this.loading = true;
     console.log(this.userLogin.value);
+    this.userService.loginUser(this.userLogin.value).subscribe(
+      response => {
+        console.log(response['token'])
+        this.loading = false;
+        localStorage.setItem('token', response['token']);
+        this.global.me = response['user'];
+        this.router.navigate(['/home']);
+      },
+      error => {
+        this.loading = false;
+        console.log('error', error);
+      }
+    );
   }
-    
 }

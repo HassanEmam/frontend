@@ -12,6 +12,8 @@ import { RegisterComponent } from './user/register/register.component';
 import { HomeComponent } from './home/home.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { CustomMaterialModule } from './material/material.module'
+import { UserService } from './services/user.service';
+import { GlobalService } from './services/global.service';
 
 @NgModule({
   declarations: [
@@ -29,12 +31,13 @@ import { CustomMaterialModule } from './material/material.module'
     FormsModule,
     BrowserAnimationsModule,
     CustomMaterialModule,
-    ReactiveFormsModule ,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   
   providers: [
-    
+    UserService,
+    GlobalService
   ],
   bootstrap: [AppComponent]
 })
