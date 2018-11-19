@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { Router }                       from "@angular/router";
-import { FileUtil }                     from './file-util';
-import { Constants }                    from './xer-constants';
+import { Router } from "@angular/router";
+import { FileUtil } from './file-util';
+import { Constants } from './xer-constants';
 import { parse } from "url";
 
 @Component({
@@ -27,18 +27,20 @@ export class XerParserComponent implements OnInit {
  
     var text = [];
     var files = $event.srcElement.files;
-    
- 
     var input = $event.target;
-    console.log(input.files[0].name);
     var reader = new FileReader();
     reader.readAsText(input.files[0]);
- 
     reader.onload = (data) => {
       let xerData = reader.result;
-      let csvRecordsArray = (<string>xerData).split(/\r\n|\n/);
-      this._fileUtil.parseXER(csvRecordsArray);     
-      
+      let v1 = performance.now()
+      let xerRecordsArray = (<string>xerData).split(/\r\n|\n/);
+      let programme = this._fileUtil.parseXER(xerRecordsArray);     
+      let v2 = performance.now();
+      console.log("Call to parse xer took " + (v2 - v1) + " milliseconds.")
+      Object.keys(programme).forEach(element => {
+        console.log(element);
+      });
+      console.log(programme);
       }    
   } 
 }
