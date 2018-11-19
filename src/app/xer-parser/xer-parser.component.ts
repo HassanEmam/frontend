@@ -43,7 +43,8 @@ export class XerParserComponent implements OnInit {
       Object.keys(programme).forEach(element => {
         console.log(element);
       });
-      this.addTasks(programme['Tasks'].slice(0,3));
+      let tasks_to_add = (<Array<string>>programme['TASK']).slice(0,3);
+      this.addTasks(tasks_to_add);
       }    
   }
   
