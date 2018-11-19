@@ -16,6 +16,8 @@ import { UserService } from './services/user.service';
 import { GlobalService } from './services/global.service';
 import { CompaniesService } from './services/companies.service';
 import { SubcontractorsService } from './services/subcontractors.service';
+import { XerParserComponent } from './xer-parser/xer-parser.component';
+import { FileUtil } from './xer-parser/file-util';
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { SubcontractorsService } from './services/subcontractors.service';
     LoginComponent,
     UserComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    XerParserComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ import { SubcontractorsService } from './services/subcontractors.service';
     UserService,
     GlobalService,
     CompaniesService,
-    SubcontractorsService
+    SubcontractorsService,
+    FileUtil
   ],
   bootstrap: [AppComponent]
 })
