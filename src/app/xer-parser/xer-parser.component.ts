@@ -16,6 +16,11 @@ export class XerParserComponent implements OnInit {
   @ViewChild('fileImportInput')
   fileImportInput: any;
   loading:boolean = false;
+  loaded:boolean = false;
+  tableSelected:boolean = false;
+  programme:{};
+  currentTable:{};
+  tables= [];
   csvRecords = [];
  
   constructor(private _router: Router,
@@ -37,14 +42,16 @@ export class XerParserComponent implements OnInit {
       let xerData = reader.result;
       let v1 = performance.now()
       let xerRecordsArray = (<string>xerData).split(/\r\n|\n/);
-      let programme = this._fileUtil.parseXER(xerRecordsArray);     
+      this.programme = this._fileUtil.parseXER(xerRecordsArray);     
       let v2 = performance.now();
       console.log("Call to parse xer took " + (v2 - v1) + " milliseconds.")
-      Object.keys(programme).forEach(element => {
+      Object.keys(this.programme).forEach(element => {
         console.log(element);
+        this.tables.push(element);
       });
-      let tasks_to_add = (<Array<string>>programme['TASK']).slice(0,3);
+      let tasks_to_add = (<Array<string>>this.programme['TASK']).slice(0,3);
       this.addTasks(tasks_to_add);
+      this.loaded = true;
       }    
   }
   
@@ -61,5 +68,11 @@ export class XerParserComponent implements OnInit {
         console.log('error', error);
       }
     );
+  }
+  onChange(selectValue){
+    console.log(selectValue);
+    this.tableSelected = true;
+    this.currentTable = this.programme[selectValue];
+    console.log(this.currentTable);
   }
 }
