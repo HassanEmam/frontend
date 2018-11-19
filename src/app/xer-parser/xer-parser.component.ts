@@ -3,6 +3,8 @@ import { Router } from "@angular/router";
 import { FileUtil } from './file-util';
 import { Constants } from './xer-constants';
 import { parse } from "url";
+import { GlobalService } from "../services/global.service";
+import { XerService } from "../services/xer.service";
 
 @Component({
   selector: 'app-xer-parser',
@@ -13,11 +15,12 @@ export class XerParserComponent implements OnInit {
 
   @ViewChild('fileImportInput')
   fileImportInput: any;
- 
+  loading:boolean = false;
   csvRecords = [];
  
   constructor(private _router: Router,
-    private _fileUtil: FileUtil
+    private _fileUtil: FileUtil, private router: Router, 
+    private xerService: XerService, private global: GlobalService
   ) { }
  
   ngOnInit() { }
@@ -40,7 +43,22 @@ export class XerParserComponent implements OnInit {
       Object.keys(programme).forEach(element => {
         console.log(element);
       });
-      console.log(programme);
+      this.addTasks(programme['Tasks'].slice(0,3));
       }    
-  } 
+  }
+  
+  addTasks(tasks) {
+    this.loading = true;
+    console.log(tasks);
+    this.xerService.add_tasks(tasks).subscribe(
+      response => {
+        this.loading = false;
+        console.log(response);
+      },
+      error => {
+        this.loading = false;
+        console.log('error', error);
+      }
+    );
+  }
 }
