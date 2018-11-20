@@ -17,8 +17,9 @@ export class XerParserComponent implements OnInit {
   fileImportInput: any;
   loading:boolean = false;
   loaded:boolean = false;
+  currentHeadings:string[];
   tableSelected:boolean = false;
-  programme:{};
+  programme:any;
   currentTable:{};
   tables= [];
   csvRecords = [];
@@ -32,9 +33,13 @@ export class XerParserComponent implements OnInit {
  
   // METHOD CALLED WHEN CSV FILE IS IMPORTED
   fileChangeListener($event): void {
- 
+    this.programme = null;
+    this.tables = [];
+    this.loaded = false;
+    this.loading = true;
     var text = [];
-    var files = $event.srcElement.files;
+    var files = null;
+    files = $event.srcElement.files;
     var input = $event.target;
     var reader = new FileReader();
     reader.readAsText(input.files[0]);
@@ -56,7 +61,7 @@ export class XerParserComponent implements OnInit {
   }
   
   addTasks(tasks) {
-    this.loading = true;
+    
     console.log(tasks);
     this.xerService.add_tasks(tasks).subscribe(
       response => {
@@ -74,5 +79,6 @@ export class XerParserComponent implements OnInit {
     this.tableSelected = true;
     this.currentTable = this.programme[selectValue];
     console.log(this.currentTable);
+    this.currentHeadings = Object.keys(this.currentTable[0]);
   }
 }

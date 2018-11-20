@@ -12,6 +12,16 @@
       <option *ngFor="let table of tables" [(value)]="table">{{table}}</option>
   </select>
   <div *ngIf="tableSelected">
-    Details goes here
+    <span>Details goes here</span>
+    <table>
+      <thead>
+        <th *ngFor="let heading of currentHeadings">{{heading}}</th>
+      </thead>
+      <tr *ngFor="let record of currentTable">
+        <td *ngFor="let heading of currentHeadings">
+          {{record[heading]}}
+        </td>
+      </tr>
+    </table>
   </div>
 </div>
